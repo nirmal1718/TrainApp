@@ -1,42 +1,40 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
-/**
- * UC1: Initialize the Train Consist Management App
- */
-import java.util.ArrayList;
-
-public class TrainApp {
+public class TrainManager {
     public static void main(String[] args) {
-        // 1. Create an ArrayList for passenger bogies
-        ArrayList<String> bogies = new ArrayList<>();
+        // Step 1: Initialize the HashSet (Set Interface implementation)
+        Set<String> trainBogies = new HashSet<>();
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("--- Train Formation Started ---");
+        System.out.println("--- Train Bogie Management System ---");
+        System.out.println("Enter Bogie IDs (Type 'done' to finish):");
 
-        // 2. Add bogies: Sleeper, AC Chair, First Class
-        // The add() method demonstrates Insertion Order Preservation
-        bogies.add("Sleeper");
-        bogies.add("AC Chair");
-        bogies.add("First Class");
+        while (true) {
+            System.out.print("Enter Bogie ID: ");
+            String input = scanner.nextLine().trim().toUpperCase();
 
-        // 3. Print the list after insertion
-        System.out.println("Current Bogies: " + bogies);
+            if (input.equalsIgnoreCase("done")) {
+                break;
+            }
 
-        // 4. Remove one bogie (AC Chair)
-        // This demonstrates the 'Delete' part of CRUD
-        System.out.println("\nRemoving 'AC Chair' for maintenance...");
-        bogies.remove("AC Chair");
+            // Step 2 & 3: Insert into HashSet.
+            // The add() method returns false if the element already exists.
+            boolean isAdded = trainBogies.add(input);
 
-        // 5. Use contains() to check if Sleeper exists
-        System.out.println("Checking existence of 'Sleeper'...");
-        if (bogies.contains("Sleeper")) {
-            System.out.println("Status: Sleeper bogie is attached to the train.");
-        } else {
-            System.out.println("Status: Sleeper bogie not found.");
+            if (isAdded) {
+                System.out.println("Bogie " + input + " added successfully.");
+            } else {
+                System.out.println("Duplicate Bogie! " + input + " ignored.");
+            }
         }
 
-        // 6. Print final list state
-        System.out.println("\nFinal Train State: " + bogies);
-        System.out.println("Total Bogies: " + bogies.size());
+        // Step 4: Display Unique IDs
+        System.out.println("\n--- Final Train Composition ---");
+        System.out.println("Total Unique Bogies: " + trainBogies.size());
+        System.out.println("Bogie List: " + trainBogies);
+
+        scanner.close();
     }
 }
