@@ -1,43 +1,40 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TrainApp {
     public static void main(String[] args) {
-        // 1. Create a LinkedHashSet to represent the train formation
-        // This ensures uniqueness + insertion order
-        Set<String> trainFormation = new LinkedHashSet<>();
+        // 1. Create a HashMap to store bogie-capacity information
+        // Key: Bogie Name (String), Value: Capacity (Integer)
+        HashMap<String, Integer> bogieCapacityMap = new HashMap<>();
 
-        // 2. Attach bogies in a specific sequence
-        System.out.println("--- Attaching Bogies ---");
-        addBogie(trainFormation, "Engine");
-        addBogie(trainFormation, "Sleeper");
-        addBogie(trainFormation, "Cargo");
-        addBogie(trainFormation, "Guard");
+        // 2. Insert capacity values using the put() method
+        // Key-Value Association: Binding bogie names to their properties
+        bogieCapacityMap.put("Sleeper", 72);
+        bogieCapacityMap.put("AC Chair Car", 78);
+        bogieCapacityMap.put("First Class", 24);
+        bogieCapacityMap.put("General", 90);
+        bogieCapacityMap.put("AC 3-Tier", 64);
 
-        // 3. Attempt to attach a duplicate bogie intentionally
-        System.out.println("\n--- Attempting Duplicate Attachment ---");
-        addBogie(trainFormation, "Sleeper"); // This should be ignored
+        System.out.println("--- Railway Bogie Capacity Mapping ---");
 
-        // 4. Display the final formation order
-        System.out.println("\n--- Final Train Formation ---");
-        System.out.println(trainFormation);
+        // 3. Iterate over the map using entrySet()
+        // This allows access to both the Key and Value in a single loop
+        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
+            String bogieType = entry.getKey();
+            Integer capacity = entry.getValue();
 
-        // Demonstrating iteration order
-        System.out.print("Physical Sequence: ");
-        for (String bogie : trainFormation) {
-            System.out.print("[" + bogie + "] -> ");
+            // 4. Display each bogie along with its corresponding capacity
+            System.out.println("Bogie Type: " + bogieType + " | Capacity: " + capacity + " seats");
         }
-        System.out.println("END");
-    }
 
-    /**
-     * Helper method to add a bogie and provide feedback
-     */
-    private static void addBogie(Set<String> formation, String bogie) {
-        if (formation.add(bogie)) {
-            System.out.println("Success: Attached " + bogie);
-        } else {
-            System.out.println("Rejected: " + bogie + " is already attached to the train!");
+        // 5. Fast Lookup Example
+        // Demonstrating the efficiency of the Map interface
+        String searchKey = "Sleeper";
+        if (bogieCapacityMap.containsKey(searchKey)) {
+            System.out.println("\nFast Lookup: The " + searchKey + " bogie has " +
+                    bogieCapacityMap.get(searchKey) + " seats.");
         }
+
+        System.out.println("\nProgram execution completed.");
     }
 }
