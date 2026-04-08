@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class TrainManager {
+public class TrainApp {
     public static void main(String[] args) {
         // Step 1: Initialize the HashSet (Set Interface implementation)
         Set<String> trainBogies = new HashSet<>();
