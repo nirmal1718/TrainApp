@@ -4,24 +4,39 @@ import java.util.List;
 /**
  * UC1: Initialize the Train Consist Management App
  */
+import java.util.ArrayList;
+
 public class TrainApp {
-
     public static void main(String[] args) {
-        // 1. Application prints welcome message
-        System.out.println("=== Train Consist Management App ===");
+        // 1. Create an ArrayList for passenger bogies
+        ArrayList<String> bogies = new ArrayList<>();
 
-        // 2. Train consist is initialized
-        // Using the List interface with ArrayList for dynamic initialization
-        // We assume the train consists of 'Bogie' objects (represented as Strings here for UC1)
-        List<String> trainConsist = new ArrayList<>();
+        System.out.println("--- Train Formation Started ---");
 
-        // 3. Initial bogie count is displayed
-        // size() returns the number of elements in the list
-        int initialCount = trainConsist.size();
-        System.out.println("Status: Train initialized.");
-        System.out.println("Initial bogie count: " + initialCount);
+        // 2. Add bogies: Sleeper, AC Chair, First Class
+        // The add() method demonstrates Insertion Order Preservation
+        bogies.add("Sleeper");
+        bogies.add("AC Chair");
+        bogies.add("First Class");
 
-        // 4. Program continues
-        System.out.println("Ready for operations...");
+        // 3. Print the list after insertion
+        System.out.println("Current Bogies: " + bogies);
+
+        // 4. Remove one bogie (AC Chair)
+        // This demonstrates the 'Delete' part of CRUD
+        System.out.println("\nRemoving 'AC Chair' for maintenance...");
+        bogies.remove("AC Chair");
+
+        // 5. Use contains() to check if Sleeper exists
+        System.out.println("Checking existence of 'Sleeper'...");
+        if (bogies.contains("Sleeper")) {
+            System.out.println("Status: Sleeper bogie is attached to the train.");
+        } else {
+            System.out.println("Status: Sleeper bogie not found.");
+        }
+
+        // 6. Print final list state
+        System.out.println("\nFinal Train State: " + bogies);
+        System.out.println("Total Bogies: " + bogies.size());
     }
 }
