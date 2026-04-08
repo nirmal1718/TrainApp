@@ -1,40 +1,38 @@
+import java.util.LinkedList;
 import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
 
-public class TrainApp {
+public class TrainManager {
     public static void main(String[] args) {
-        // Step 1: Initialize the HashSet (Set Interface implementation)
-        Set<String> trainBogies = new HashSet<>();
-        Scanner scanner = new Scanner(System.in);
+        // Core data structures
+        LinkedList<String> trainConsist = new LinkedList<>();
+        HashSet<String> uniqueBogieIds = new HashSet<>();
 
-        System.out.println("--- Train Bogie Management System ---");
-        System.out.println("Enter Bogie IDs (Type 'done' to finish):");
+        // Helper method to add unique bogies
+        String[] bogiesToAdd = {"Engine", "Sleeper", "AC", "Cargo", "Guard", "Sleeper"}; // Note: Duplicate Sleeper
 
-        while (true) {
-            System.out.print("Enter Bogie ID: ");
-            String input = scanner.nextLine().trim().toUpperCase();
-
-            if (input.equalsIgnoreCase("done")) {
-                break;
-            }
-
-            // Step 2 & 3: Insert into HashSet.
-            // The add() method returns false if the element already exists.
-            boolean isAdded = trainBogies.add(input);
-
-            if (isAdded) {
-                System.out.println("Bogie " + input + " added successfully.");
+        System.out.println("--- Adding Bogies ---");
+        for (String id : bogiesToAdd) {
+            if (uniqueBogieIds.add(id)) {
+                trainConsist.addLast(id);
+                System.out.println("Added: " + id);
             } else {
-                System.out.println("Duplicate Bogie! " + input + " ignored.");
+                System.out.println("Ignored Duplicate: " + id);
             }
         }
 
-        // Step 4: Display Unique IDs
-        System.out.println("\n--- Final Train Composition ---");
-        System.out.println("Total Unique Bogies: " + trainBogies.size());
-        System.out.println("Bogie List: " + trainBogies);
+        // UC4 Specific Operations
+        System.out.println("\n--- Modifying Consist ---");
 
-        scanner.close();
+        // 1. Insert Pantry Car at position 2 (Index 2)
+        trainConsist.add(2, "Pantry Car");
+        System.out.println("Inserted Pantry Car at position 2.");
+
+        // 2. Remove first and last bogie
+        System.out.println("Removing first: " + trainConsist.removeFirst());
+        System.out.println("Removing last: " + trainConsist.removeLast());
+
+        // 3. Display final ordered consist
+        System.out.println("\n--- Final Train Consist ---");
+        System.out.println(String.join(" <-> ", trainConsist));
     }
 }
