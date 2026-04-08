@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.HashSet;
 
-public class TrainManager {
+public class TrainApp {
     public static void main(String[] args) {
         // Core data structures
         LinkedList<String> trainConsist = new LinkedList<>();
